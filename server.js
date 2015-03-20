@@ -1,3 +1,5 @@
+// 'use strict';
+
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -8,10 +10,10 @@ var db = require('./config/db');
 
 
 var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-    next();
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    return next();
 };
 
 app.use(allowCrossDomain);
@@ -26,11 +28,12 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
 
+app.get('/', function(req, res){
+	res.sendFile('index.html', { root: './public' });
+});
+
 var port = process.env.PORT || 3000;
-
-
-
-require('./app/route')(app);
+require('./app/routes/personRoute')(app);
 
 
 app.listen(port);

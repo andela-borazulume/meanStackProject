@@ -2,7 +2,7 @@ var app = angular.module('app', ['ngRoute']).
 config(['$routeProvider', function($routeProvider) {
     $routeProvider.
     when('/home', {
-        templateUrl: 'views/home.html',
+        templateUrl: '../views/home.html',
         controller: 'mainCtrl'
     }).
     when('/geek', {
