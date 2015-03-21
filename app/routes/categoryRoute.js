@@ -14,13 +14,17 @@ module.exports = function(app){
 
 	});
 
-	router.route('/category').
-	post(categoryController.postCategory).
-	get(categoryController.getCategory);
+	router.route('/categories').  /* to create and find category */
+	post(categoryController.createCategory). 
+	get(categoryController.allCategories);
 
-	router.route('/category/:category_id').
-	get(categoryController.getCategoryById).
-	put(categoryController.updateCategoryById).
-	delete(categoryController.deleteCategoryById);
+	router.route('/categories/:category_id'). /* to find, update and delete a particular category */
+	get(categoryController.getCategoryById);
+	
+	router.param("category_id", categoryController.findOne);
+
+	// router.param('category_id', .findOne);
+	// put(categoryController.updateCategoryById).
+	// delete(categoryController.deleteCategoryById);
 
 };

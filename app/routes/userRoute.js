@@ -3,24 +3,26 @@ var user = require('../controllers/userController');
 
 
 module.exports = function(app) {
-    var express = require('express');
+  var express = require('express');
 
-    var router = express.Router();
+  var router = express.Router();
 
-    app.use('/api', router);
+  app.use('/api', router);
 
-    router.use(function(req, res, next) {
-        console.log("Waiting for something to happen");
-        next();
+  router.use(function(req, res, next) {
+  console.log("Waiting for something to happen");
+  next();
 
-    });
+  });
 
-    router.route('/details').
-    post(user.postRoute).
-    get(user.getRoute);
+  router.route('/users'). /* to create and find all users */
+  post(user.createUser).
+  get(user.allusers);
 
-    router.route('/details/:person_id').
-        get(user.getRouteById).
-    put(user.updateRouteById).
-    delete(user.deleteRouteById);
+  router.route('/users/:user_id'). /* to find, update and delete a particular user */
+  get(user.getUserById).
+  put(user.updateUser).
+  delete(user.deleteUser);
+
+  router.param('user_Id', user.findOne);
 };

@@ -35,7 +35,7 @@ app.get('/', function(req, res){
 var port = process.env.PORT || 3000;
 require('./app/routes/userRoute')(app);
 require('./app/routes/categoryRoute')(app);
-// require('./app/routes/commentRoute')(app);
+require('./app/routes/postRoute')(app);
 
 
 app.listen(port);

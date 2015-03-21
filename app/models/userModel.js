@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var personalSchema = new Schema({
+var userSchema = new Schema({
     firstName: {
         type: String,
         trim: true,
@@ -22,7 +22,7 @@ var personalSchema = new Schema({
         trim: true,
         default: '',
         required: "Please fill in your email",
-        match: [/.+\@.+\..+/, 'Please fill in a valid email address']
+        // match: [/.+\..+/, 'Please fill in a valid email address']
     },
     gender: {
         type: String,
@@ -54,8 +54,12 @@ var personalSchema = new Schema({
     dateRegistered: {
         type: Date,
         default: Date.now
-    }
+    },
+    posts: [{
+        type: Schema.Types.ObjectId,
+        ref: "PostModel"
+    }]
 
 });
 
-module.exports = mongoose.model('User', personalSchema,'details');
+module.exports = mongoose.model('User', userSchema,'details');

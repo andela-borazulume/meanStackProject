@@ -3,17 +3,8 @@
 var mongoose = require('mongoose');
 var User = require('../models/userModel');
 
-exports.postRoute = function(req, res) {
-  var personal = new Details();
-  personal.firstName = req.body.firstName;
-  personal.lastName = req.body.lastName;
-  personal.email = req.body.email;
-  personal.gender = req.body.gender;
-  personal.phoneNumber = req.body.phoneNumber;
-  personal.password = req.body.password;
-  personal.userName = req.body.username;
-  personal.dateOfBirth = req.body.dateOfBirth;
-
+exports.createUser = function(req, res) {
+  var personal = new User(req.body);
   personal.save(function(err) {
     if (err) {
         res.send(err);
@@ -26,44 +17,44 @@ exports.postRoute = function(req, res) {
   });
 };
 
-exports.getRoute = function(req, res) {
-  User.find(function(err, data) {
-    console.log(data);
+exports.allusers = function(req, res) {
+  User.find(function(err, user) {
     if (err) {
         res.send(err);
     } else {
-        res.json(data);
+        res.json(user);
     }
   });
 
 };
 
-exports.getRouteById = function(req, res) {
-  User.findById(req.params.person_id, function(err, data) {
-    console.log(data);
-    if (err) {
+exports.findOne = function(req, res, next){
+  User.findById(req.params.user_id).populate("posts").exec( function(err, user) {
+    if(err){
       res.send(err);
-
-    } else {
-      res.json(data);
     }
+    else{
+      req.user = user;
+      next();
+    }
+  }); 
+};
 
-  });
+exports.getUserById = function(req, res) {
+  
+  res.json(req.user);
 
 };
 
-exports.updateRouteById = function(req, res) {
-  User.findById(req.params.person_id, function(err, data) {
-    var personal = new Details();
+exports.updateUser = function(req, res) {
+  User.findById(req.params.user_id, function(err, user) {
+    var personal = new User(req.body);
 
     if (err) {
         res.send(err);
 
     } else {
-      console.log(req.body);
-      data.firstName = req.body.firstName;
-      data.lastName = req.body.lastName;
-      data.email = req.body.email;
+      
       data.save(function(err) {
         if (err) {
             res.send(err);
@@ -79,20 +70,18 @@ exports.updateRouteById = function(req, res) {
   });
 };
 
-exports.deleteRouteById = function(req, res) {
+exports.deleteUser = function(req, res) {
   User.remove({
-  _id: req.params.person_id
-  }, function(err, data) {
+  _id: req.params.user_id
+  }, function(err, user) {
     if (err) {
-        res.send(err);
+      res.send(err);
 
     } else {
-        res.json({
-            message: "It has been deleted"
-        });
+      res.json({
+          message: "It has been deleted"
+      });
     }
 
   });
-
-
 };
