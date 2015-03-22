@@ -4,7 +4,10 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
 // var cors = require('cors');
+
+
 
 var db = require('./config/db');
 
@@ -19,6 +22,9 @@ var allowCrossDomain = function(req, res, next) {
 app.use(allowCrossDomain);
 // app.use(cors());
 
+require('./app/models/userModel');
+require('./config/passport');
+
 mongoose.connect(db.url);
 
 app.use(bodyParser.urlencoded({
@@ -27,6 +33,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
+app.use(passport.initialize());
 
 app.get('/', function(req, res){
 	res.sendFile('index.html', { root: './public' });

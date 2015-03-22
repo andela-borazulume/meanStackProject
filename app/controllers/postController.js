@@ -1,45 +1,6 @@
 var PostModel = require('../models/postModel');
 var Category = require('../models/categoryModel');
-var categoryController = require('../controllers/categoryController');
 
-exports.createPosts = function(req, res){
-
-		categoryController.findOne(req, res, function (){
-
-			var category = req.category;
-			var posts = new PostModel();
-		posts.content = req.body.content;
-
-		posts.save(function(err){
-			if(err){
-				res.send(err, posts);
-
-			}
-
-			else {
-				category.posts.push(posts);
-				category.save(function(err, posts){
-					if(err){
-						res.send(err);
-
-					}
-					else{
-						res.json(posts);
-					}
-
-				});
-				
-			}
-		});
-
-	});
-};
-
-exports.postsByCategory = function(req, res){
-	console.log(req.params.category_id);
-	PostModel.where('category', req.params.category_id);
-
-};
 
 exports.getPosts = function(req, res){
 		PostModel.find(function(err, posts){
@@ -54,6 +15,55 @@ exports.getPosts = function(req, res){
 
 		});
 
+	};
 
+exports.getPostById = function(req, res){
+			PostModel.findById(req.params.post_id, function(err, posts){
+				if(err){
+					res.send();
 
+				}
+
+				else {
+					res.json(posts);
+				}
+
+			});
+
+		};
+
+exports.updatePost = function(req, res){
+			PostModel.findById(req.params.post_id, function(err, posts){
+				var post = new PostModel(req.body);
+				if(err){
+					res.send(err);
+				}
+
+				else {
+					post.save(function(err, posts){
+						if(err){
+							res.send(err);
+						}
+						else {
+							res.json(posts);
+						}
+					});
+				}
+			});
+		};
+
+exports.deletePost = function(req, res) {
+	 		PostModel.remove({
+	 	  _id: req.params.post_id
+	  	}, function(err, post) {
+	    if (err) {
+	      res.send(err);
+
+	    } else {
+	      res.json({
+	          message: "It has been deleted"
+	      });
+	    }
+
+	  });
 	};

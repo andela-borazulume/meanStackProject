@@ -14,45 +14,13 @@ module.exports = function(app){
 
 	});
 
-	router.route('/categories/:category_id/posts').
-		post(postController.createPosts).
-		get(postController.postsByCategory);
-
-
 		router.route('/posts').
 		get( postController.getPosts ); 
 
+		router.route('/posts/:post_id').
+		get( postController.getPostById).
+		put( postController.updatePost).
+		delete( postController.deletePost);
 
-	// router.route('/posts/category/:category_id/post').
-	// post(function(req, res){
-	// 	var postmodel = new PostModel();
-	// 	postmodel.content = req.body.content;
-	// 	postmodel.save(function(err){
-	// 		if(err){
-	// 			res.status(500).send(err);
-	// 		}
-
-	// 		else {
-	// 			res.json({
-	// 				message: "The information has been posted"
-	// 			});
-	// 		}
-
-	// 	});
-
-	// });  /* To get posts of users of a particular category */
-	// get(function(req, res){
-	// 	PostModel.find(function(err, posts){
-	// 		if (err) {
-	// 			res.status(500).send(err);
-
-	// 		}
-
-	// 		else {
-	// 			res.json(posts);
-	// 		}
-
-	// 	});
-
-	// });
 };
+

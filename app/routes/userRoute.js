@@ -1,6 +1,6 @@
-var User = require('../models/userModel');
-var user = require('../controllers/userController');
 
+var user = require('../controllers/userController');
+var controller = require('../controllers/categoryController');
 
 module.exports = function(app) {
   var express = require('express');
@@ -19,10 +19,23 @@ module.exports = function(app) {
   post(user.createUser).
   get(user.allusers);
 
+  router.route('/login').
+  post(user.login);
+
+  router.route('/logout').
+  get(user.logout);
+
   router.route('/users/:user_id'). /* to find, update and delete a particular user */
   get(user.getUserById).
   put(user.updateUser).
   delete(user.deleteUser);
 
-  router.param('user_Id', user.findOne);
+  router.route('/users/:user_id/categories/:category_id/posts').
+  get(user.getPosts).
+  post(controller.createPosts);
+
+  // router.route('/users/:user_id/categories/:category_id/posts').
+  // post(controller.createPosts);
+
+  router.param("user_id", user.findOne); 
 };

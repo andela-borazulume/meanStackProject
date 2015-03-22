@@ -1,10 +1,10 @@
 var Category = require('../models/categoryModel');
-var postController = require("../controllers/postController");
-
+var User = require('../models/userModel');
+var PostModel = require("../models/postModel");
 
 exports.createCategory = function(req, res) {
   var category = new Category(req.body);
-  
+
   category.save(function(err) {
     if (err) {
        res.send(err);
@@ -40,10 +40,42 @@ exports.findOne = function(req, res, next) {
 };
 
 exports.getCategoryById = function(req, res) {
-
+  console.log(req.params);
   res.json(req.category);
   
 };
+
+exports.createPosts = function(req, res){
+
+    var category = req.category;
+    var posts = new PostModel(req.body);
+    posts.user = req.params.user_id;
+    posts.category = category.id;
+  
+
+  posts.save(function(err){
+    if(err){
+      res.send(err, posts);
+
+    }
+
+    else {
+      category.posts.push(posts);
+      category.save(function(err, posts){
+        if(err){
+          res.send(err);
+
+        }
+        else{
+          res.json(posts);
+        }
+
+      });
+      
+    }
+  });
+};
+
 
 exports.updateCategoryById = function(req, res){
 	Category.findById(req.params.category_id, function(err, category){
@@ -70,19 +102,21 @@ exports.updateCategoryById = function(req, res){
 
 };
 
-// exports.deleteCategoryById = function(req, res){
-// 	Category.remove({
-// 		_id: req.params.category_id
-// 	},function(err){
-// 		if(err){
-// 			res.send(err);
-// 		}
 
-// 		else{
-// 			res.json({
-// 				message: "It has been deleted"
-// 			});
-// 		}
-// 	});
 
-// };
+exports.deleteCategoryById = function(req, res){
+	Category.remove({
+		_id: req.params.category_id
+	},function(err){
+		if(err){
+			res.send(err);
+		}
+
+		else{
+			res.json({
+				message: "It has been deleted"
+			});
+		}
+	});
+
+};
