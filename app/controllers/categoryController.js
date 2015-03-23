@@ -46,34 +46,36 @@ exports.getCategoryById = function(req, res) {
 };
 
 exports.createPosts = function(req, res){
-
+   console.log(req.params);
     var category = req.category;
     var posts = new PostModel(req.body);
     posts.user = req.params.user_id;
-    posts.category = category.id;
+    posts.category = req.params.category_id;
   
 
   posts.save(function(err){
     if(err){
       res.send(err, posts);
 
+    }   
+    else{
+      res.json(posts);
     }
 
+  });
+};
+
+exports.getPostByCategory = function(req, res){
+  PostModel.where('category').equals(req.params.category_id).exec(function(err, posts){
+    if(err){
+      res.send(err);
+
+    }
     else {
-      category.posts.push(posts);
-      category.save(function(err, posts){
-        if(err){
-          res.send(err);
-
-        }
-        else{
-          res.json(posts);
-        }
-
-      });
-      
+      res.json(posts);
     }
   });
+
 };
 
 

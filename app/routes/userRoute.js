@@ -15,11 +15,11 @@ module.exports = function(app) {
 
   });
 
-  router.route('/users'). /* to create and find all users */
+  router.route('/users'). /* to signup and find all users */
   post(user.createUser).
   get(user.allusers);
 
-  router.route('/login').
+  router.route('/login'). /* for the user to login */
   post(user.login);
 
   router.route('/logout').
@@ -34,8 +34,8 @@ module.exports = function(app) {
   get(user.getPosts).
   post(controller.createPosts);
 
-  // router.route('/users/:user_id/categories/:category_id/posts').
-  // post(controller.createPosts);
+  router.route('/users/:user_id/posts').
+  get(user.getPostsByUser);
 
   router.param("user_id", user.findOne); 
 };

@@ -24,7 +24,7 @@ module.exports = function(app) {
     delete(categoryController.deleteCategoryById);
 
     router.route('/categories/:category_id/posts').
-    post(categoryController.createPosts);
+    get(categoryController.getPostByCategory);
    
     router.param("category_id", categoryController.findOne);
 

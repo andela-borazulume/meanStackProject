@@ -11,17 +11,29 @@ exports.createUser = function(req, res) {
             message: 'Please fill out all fields'
         });
     }
-    var personal = new User(req.body);
+    User.findOne({ 'username' :  req.body.username }, function(err, user) {
+            // if there are any errors, return the error
+            if (err)
+                return done(err);
 
-    personal.save(function(err, user) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.jsonp(user);
+            // check to see if theres already a user with that email
+            if (user) {
+                res.send({signupMessage: "Error Error Error"});
+            }
+            else {
+          var personal = new User(req.body);
+
+          personal.save(function(err, user) {
+              if (err) {
+                  res.send(err);
+              } else {
+                  res.jsonp(user);
+              }
+
+          });
         }
-
     });
-};
+  };
 
 exports.login = function(req, res, next) {
     if (!req.body.username || !req.body.password) {
@@ -31,7 +43,6 @@ exports.login = function(req, res, next) {
     }
 
     passport.authenticate('local', function(err, user, info) {
-        console.log(user);
         if (err) {
             return next(err);
         }
@@ -58,7 +69,7 @@ exports.allusers = function(req, res) {
 
 exports.logout = function(req, res) {
     req.logout();
-    res.json("User logged successfully");
+    res.json("User logged out successfully");
 };
 
 
@@ -82,6 +93,19 @@ exports.getUserById = function(req, res) {
 exports.getPosts = function(req, res) {
 
     res.json(req.user.posts);
+
+};
+
+exports.getPostsByUser = function(req, res){
+    PostModel.where('user').equals(req.params.user_id).exec(function(err, posts){
+        if(err){
+            res.send(err);
+        }
+
+        else {
+            res.json(posts);
+        }
+    });
 
 };
 

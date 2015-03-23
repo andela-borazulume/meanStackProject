@@ -1,18 +1,18 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
-var jwt = require('jsonwebtoken')
+var jwt = require('jsonwebtoken');
 
 var userSchema = new Schema({
     firstName: {
         type: String,
         trim: true,
-        // required: "Please fill in your first name"
+        required: "Please fill in your first name"
     },
     lastName: {
         type: String,
         trim: true,
-        // required: "Please fill in your last name"
+        required: "Please fill in your last name"
     },
     middleName: {
         type: String,
