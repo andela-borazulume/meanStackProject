@@ -1,6 +1,6 @@
 
 var user = require('../controllers/userController');
-var controller = require('../controllers/categoryController');
+var postcontroller = require('../controllers/postController');
 
 module.exports = function(app) {
   var express = require('express');
@@ -32,7 +32,7 @@ module.exports = function(app) {
 
   router.route('/users/:user_id/categories/:category_id/posts').
   get(user.getPosts).
-  post(controller.createPosts);
+  post(postcontroller.createPosts);
 
   router.route('/users/:user_id/posts').
   get(user.getPostsByUser);

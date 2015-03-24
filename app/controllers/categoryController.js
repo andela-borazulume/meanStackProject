@@ -40,30 +40,10 @@ exports.findOne = function(req, res, next) {
 };
 
 exports.getCategoryById = function(req, res) {
-  console.log(req.params);
   res.json(req.category);
   
 };
 
-exports.createPosts = function(req, res){
-   console.log(req.params);
-    var category = req.category;
-    var posts = new PostModel(req.body);
-    posts.user = req.params.user_id;
-    posts.category = req.params.category_id;
-  
-
-  posts.save(function(err){
-    if(err){
-      res.send(err, posts);
-
-    }   
-    else{
-      res.json(posts);
-    }
-
-  });
-};
 
 exports.getPostByCategory = function(req, res){
   PostModel.where('category').equals(req.params.category_id).exec(function(err, posts){

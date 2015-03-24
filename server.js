@@ -5,6 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var session = require('express-session');
 // var cors = require('cors');
 
 
@@ -33,7 +34,10 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
+app.use(session({ secret: 'iloveprogrammingwhataboutyou' }));
 app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.get('/', function(req, res){
 	res.sendFile('index.html', { root: './public' });

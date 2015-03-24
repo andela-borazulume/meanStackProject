@@ -1,6 +1,25 @@
 var PostModel = require('../models/postModel');
 var Category = require('../models/categoryModel');
 
+exports.createPosts = function(req, res){
+    var category = req.category;
+    var posts = new PostModel(req.body);
+    posts.user = req.params.user_id;
+    posts.category = req.params.category_id;
+  
+
+  posts.save(function(err){
+    if(err){
+      res.send(err, posts);
+
+    }   
+    else{
+      res.json(posts);
+    }
+
+  });
+};
+
 
 exports.getPosts = function(req, res){
 		PostModel.find(function(err, posts){

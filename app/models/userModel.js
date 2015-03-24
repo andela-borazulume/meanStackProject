@@ -23,8 +23,8 @@ var userSchema = new Schema({
         type: String,
         trim: true,
         default: '',
-        // required: "Please fill in your email",
-        // match: [/.+\..+/, 'Please fill in a valid email address']
+        required: "Please fill in your email",
+        match: [ /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Please fill in a valid email address']
     },
     gender: {
         type: String,
@@ -32,7 +32,7 @@ var userSchema = new Schema({
         default: '',
     },
     phoneNumber: {
-        type: String,
+        type: Number,
         trim: true,
         default: '',
     },

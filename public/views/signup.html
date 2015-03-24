@@ -1,0 +1,59 @@
+<div>
+	<div class="row">
+  <div class="col s12 m6 offset-m3">
+  <div class="valign-wrapper">
+  <div class="valign">
+    <div class="card  brown lighten-5" id="adjust">
+      <div class="card-content white-text">
+          <span class="card-title">Create an account</span>
+          
+      </div>
+      <div class="card-action">
+      	<div class="row">
+				  <form class="col s12" ng-submit="register()">
+				    <div class="row">
+				      <div class="input-field col s6">
+				        <input id="first_name" type="text" class="validate" ng-model="firstName">
+				        <label for="first_name">First Name</label>
+				      </div>
+				      <div class="input-field col s6">
+				        <input id="last_name" type="text" class="validate" ng-model="lastName">
+				        <label for="last_name">Last Name</label>
+				      </div>
+				    </div>
+				    <div class="row">
+				      <div class="input-field col s6">
+				        <input id="username" type="text" class="validate" ng-model="username">
+				        <label for="username">Username</label>
+				      </div>
+
+				      <div class="input-field col s6">
+				        <input id="phone-Number" type="text" class="validate" ng-model="phoneNumber">
+				        <label for="phone-Number">Phone-Number</label>
+				      </div>
+
+				    </div>
+				    <div class="row">
+				      <div class="input-field col s12">
+				        <input id="password" type="password" class="validate" ng-model="password">
+				        <label for="password">Password</label>
+				      </div>
+				    </div>
+				    <div class="row">
+				      <div class="input-field col s12">
+				        <input id="email" type="email" class="validate" ng-model="email">
+				        <label for="email">Email</label>
+				      </div>
+				    </div>
+				    <input type="submit" value="Sign Up" class="waves-effect waves-light btn"></a>
+				    <input type="button" value='click me' ng-click="getUsers()">
+				  </form>
+				</div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+</div>

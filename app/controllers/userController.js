@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var User = require('../models/userModel');
 var PostModel = require('../models/postModel');
 var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
 
 exports.createUser = function(req, res) {
     if (!req.body.username || !req.body.password) {
@@ -18,7 +20,7 @@ exports.createUser = function(req, res) {
 
             // check to see if theres already a user with that email
             if (user) {
-                res.send({signupMessage: "Error Error Error"});
+                res.send({signupMessage: "Username already exists"});
             }
             else {
           var personal = new User(req.body);
@@ -27,6 +29,7 @@ exports.createUser = function(req, res) {
               if (err) {
                   res.send(err);
               } else {
+                  console.log(user);
                   res.jsonp(user);
               }
 
@@ -90,9 +93,16 @@ exports.getUserById = function(req, res) {
 
 };
 
-exports.getPosts = function(req, res) {
-
-    res.json(req.user.posts);
+exports.getPosts = function(req, res){
+    PostModel.where('user').equals(req.params.user_id).where('category')
+    .equals(req.params.category_id).exec(function(err, posts){
+        if(err){
+            res.send(err);
+        }
+        else{
+            res.json(posts);
+        }
+    });
 
 };
 
