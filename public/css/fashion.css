@@ -1,5 +1,5 @@
 #adjust {
-	padding-top: 4em;
+	padding-top: 2em;
 }
 
 #shift {
@@ -24,4 +24,8 @@ font-family: 'Playfair Display', serif;
 }
 #align {
 	margin-right: 15em;
+}
+
+i{
+	margin-left: -2em;
 }
