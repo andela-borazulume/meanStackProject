@@ -1,9 +1,27 @@
 #adjust {
-	height: 40em;
-	width: 50em;
+	padding-top: 4em;
 }
 
 #shift {
 	padding: 10em 13em;
 }
 
+#sideImg {
+	height: 30em;
+	width: 37em;
+	padding-top: 3em;
+}
+#heading {
+	font-family: 'Playfair Display', serif;
+}
+#heading2 {
+font-family: 'Playfair Display', serif;
+}
+#search {
+	padding-top: 4em;
+	margin-left: -10em;
+
+}
+#align {
+	margin-right: 15em;
+}

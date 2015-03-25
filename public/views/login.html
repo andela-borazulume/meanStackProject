@@ -1,29 +1,30 @@
 <div>
 	<div class="row">
-  <div class="col s12 m6 offset-m3">
-  <div class="valign-wrapper">
-  <div class="valign">
-    <div class="card  brown lighten-5" id="adjust">
+
+   <div class="col m12" id="adjust">
+    <div class="card grey lighten-5">
       <div class="card-content white-text">
-          <span class="card-title">Create an account</span>
+          <span class="grey-text text-darken-4" class="card-title" ><h3 class="center-align">Log in</span>
           
       </div>
       <div class="card-action">
       	<div class="row">
 				  <form class="col s12" ng-submit="login()">
-				    <div class="row">
-				      <div class="input-field col s6">
+				  <div class="adjust">
+				      <div class="input-field col s6 offset-s4">
+				      <i class="small mdi-action-perm-identity"></i>
 				        <input id="username" type="text" class="validate" ng-model="username">
 				        <label for="username">Username</label>
-				      </div>
+				     </div>
 
-				      <div class="input-field col s6">
+				      <div class="input-field col s6 offset-s4">
+				      <i class="small mdi-action-lock"></i>
 				        <input id="password" type="password" class="validate" ng-model="password">
 				        <label for="password">Password</label>
 				      </div>
 				    </div>
 				    <input type="submit" value="Sign in" class="waves-effect waves-light btn">
-				
+				</div>
 				  </form>
 				</div>
       </div>

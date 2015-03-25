@@ -5,38 +5,37 @@ var User = require('../models/userModel');
 var PostModel = require('../models/postModel');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
+var session = require('express-session');
 
 exports.createUser = function(req, res) {
-    if (!req.body.username || !req.body.password) {
-        return res.status(400).json({
-            message: 'Please fill out all fields'
-        });
-    }
-    User.findOne({ 'username' :  req.body.username }, function(err, user) {
-            // if there are any errors, return the error
-            if (err)
-                return done(err);
-
-            // check to see if theres already a user with that email
-            if (user) {
-                res.send({signupMessage: "Username already exists"});
-            }
-            else {
-          var personal = new User(req.body);
-
-          personal.save(function(err, user) {
-              if (err) {
-                  res.send(err);
-              } else {
-                  console.log(user);
-                  res.jsonp(user);
-              }
-
-          });
-        }
+  if (!req.body.username || !req.body.password) {
+    return res.status(400).json({
+        message: 'Please fill out all fields'
     });
-  };
+  }
+  User.findOne({ 'username' :  req.body.username }, function(err, user) {
+      // if there are any errors, return the error
+    if (err){
+        return done(err);
+      }
+    // check to see if theres already a user with that email
+    if (user) {
+        res.send({signupMessage: "Username already exists"});
+    }
+    else {
+      var personal = new User(req.body);
+
+      personal.save(function(err, user) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.jsonp(user);
+        }
+
+      });
+    }
+  });
+};
 
 exports.login = function(req, res, next) {
     if (!req.body.username || !req.body.password) {
@@ -45,7 +44,7 @@ exports.login = function(req, res, next) {
         });
     }
 
-    passport.authenticate('local', function(err, user, info) {
+    passport.authenticate('local-login', function(err, user, info) {
         if (err) {
             return next(err);
         }
