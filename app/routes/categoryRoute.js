@@ -1,5 +1,7 @@
 var Category = require('../models/categoryModel');
 var categoryController = require('../controllers/categoryController');
+var postcontroller = require('../controllers/postController');
+
 var mongoose = require('mongoose');
 
 module.exports = function(app) {
@@ -24,6 +26,7 @@ module.exports = function(app) {
     delete(categoryController.deleteCategoryById);
 
     router.route('/categories/:category_id/posts').
+    post(postcontroller.createPosts).
     get(categoryController.getPostByCategory);
    
     router.param("category_id", categoryController.findOne);

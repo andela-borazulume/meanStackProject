@@ -29,3 +29,10 @@ font-family: 'Playfair Display', serif;
 i{
 	margin-left: -2em;
 }
+#adjust1 {
+	margin-left: -10em;
+}
+#coll {
+	width: 32em;
+	padding-top: 5em;
+}
