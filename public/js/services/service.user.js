@@ -12,20 +12,42 @@ angular.module('app').factory('Categories', ['$resource',
  angular.module('app').factory('post', ['$http', function($http) {
   return {
     getPosts: function(query, callback) {
-      console.log(query);
       return $http.get("/api/categories/"+query+"/posts")
         .success(callback);
     }
   };
 }]);
 
-angular.module('app').factory('comment', ['$http', function($http){
+angular.module('app').factory('comment', ['$http', function($http) {
 	return {
 		postComment: function(query, data, callback){
-			console.log(data);
-			return $http.post("/api/posts/"+query+"/comments", data).
-			success(callback);
+			return $http.post("/api/posts/"+query+"/comments", data)
+				.success(callback);
 
 		}
 	};
+}]);
+
+angular.module('app').factory('getAllPosts', ['$resource', 
+	function($resource){
+		return $resource('/api/posts');
+
+}]);
+
+ angular.module('app').factory('getPostById', ['$http', function($http) {
+  return {
+    getpost: function(query, callback) {
+      return $http.get("/api/users/"+query+"/posts")
+        .success(callback);
+    }
+  };
+}]);
+
+angular.module('app').factory('getComments', ['$http', function($http) {
+  return {
+    getComment: function(query, callback) {
+      return $http.get("/api/posts/"+query+"/comments")
+        .success(callback);
+    }
+  };
 }]);

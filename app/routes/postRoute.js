@@ -1,7 +1,8 @@
-var postController = require("../controllers/postController");
-var PostModel = require("../models/postModel");
-var commentModel = require("../models/commentsModel");
-var mongoose = require("mongoose");
+var user            = require("../controllers/userController"),
+    postController  = require("../controllers/postController"),
+    PostModel       = require("../models/postModel"),
+    commentModel    = require("../models/commentsModel"),
+    mongoose        = require("mongoose");
 
 module.exports = function(app) {
     var express = require("express");
@@ -15,49 +16,25 @@ module.exports = function(app) {
 
     });
 
-    router.route('/posts').
-    get(postController.getPosts);
+    router.route('/posts').get(postController.getPosts);
 
-    router.route('/posts/:post_id').
-    get(postController.getPostById).
-    put(postController.updatePost).
-    delete(postController.deletePost);
+    router.route('/posts/:post_id')
+        .get(postController.getPostById)
+        .put(user.requiresLogin, postController.updatePost)
+        .delete(user.requiresLogin, postController.deletePost);
 
-    router.route('/posts/:post_id/comments').
-    post(function(req, res) {
-      var comment = new commentModel(req.body);
-      // PostModel.comments.push(comment);
-      comment.save(function(err, comments) {
-          if (err) {
+    router.route('/posts/:post_id/comments')
+        .post(user.requiresLogin, postController.postComments)
+        .get(function(req, res){
+          PostModel.findById(req.params.post_id, function(err, comments){
+            if(err){
               res.send(err);
-
-          } else {
+            }
+            else {
               res.json(comments);
-              PostModel.findById(req.params.post_id, function(err, post) {
-                console.log(req.params.post_id);
-                  if (err) {
-                      res.send(err);
+            }
 
-                  } else {
-                      post.comments.push(comments);
-                      post.save(function(err, post) {
-                          if (err) {
-                              res.send(err);
-
-                          } else {
-                              res.json(post);
-                          }
-
-                      });
-
-                  }
-
-
-              });
-          }
-
-        });
-
+          });
     });
 
 };

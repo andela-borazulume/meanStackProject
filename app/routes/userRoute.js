@@ -32,7 +32,7 @@ module.exports = function(app) {
 
   router.route('/users/:user_id/categories/:category_id/posts').
   get(user.getPosts).
-  post(postcontroller.createPosts);
+  post(user.requiresLogin, postcontroller.createPosts);
 
   router.route('/users/:user_id/posts').
   get(user.getPostsByUser);

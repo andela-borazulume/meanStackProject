@@ -1,11 +1,11 @@
 'use Strict';
 
-var mongoose = require('mongoose');
-var User = require('../models/userModel');
-var PostModel = require('../models/postModel');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var session = require('express-session');
+var mongoose      = require('mongoose'),
+     User          = require('../models/userModel'),
+     PostModel     = require('../models/postModel'),
+     passport      = require('passport'),
+     LocalStrategy = require('passport-local').Strategy,
+     session       = require('express-session');
 
 exports.createUser = function(req, res) {
   if (!req.body.username || !req.body.password) {
@@ -38,19 +38,19 @@ exports.createUser = function(req, res) {
 };
 
 exports.login = function(req, res, next) {
-    if (!req.body.username || !req.body.password) {
-        return res.status(400).json({
-            message: 'Please fill out all fields'
-        });
-    }
-
     passport.authenticate('local-login', function(err, user, info) {
         if (err) {
             return next(err);
         }
 
         if (user) {
-            return res.jsonp(user);
+            req.login(user, function(err) {
+                if (err) {
+                    res.send(400, err);
+                } else {
+                    res.jsonp(user);
+                }
+            });
         } else {
             return res.status(401).json(info);
         }
@@ -66,6 +66,16 @@ exports.allusers = function(req, res) {
         }
     });
 
+};
+
+exports.requiresLogin = function(req, res, next) {
+    if (!req.isAuthenticated()) {
+        return res.send(401, {
+            message: 'User is not logged in'
+        });
+    }
+
+    next();
 };
 
 

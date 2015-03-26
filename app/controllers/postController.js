@@ -1,5 +1,7 @@
 var PostModel = require('../models/postModel');
 var Category = require('../models/categoryModel');
+var commentModel = require("../models/commentsModel");
+
 
 exports.createPosts = function(req, res) {
   var category = req.category;
@@ -38,6 +40,44 @@ exports.getPostById = function(req, res) {
     }
   });
 };
+
+exports. postComments= function(req, res) {
+      var comment = new commentModel(req.body);
+      // PostModel.comments.push(comment);
+      comment.save(function(err, commentsByPost) {
+          if (err) {
+              res.send(err);
+
+          } else {
+              res.json(commentsByPost);
+
+              PostModel.findById(req.params.post_id, function(err, post) {
+                console.log(req.params.post_id);
+                  if (err) {
+                      res.send(err);
+
+                  } else {
+
+                      post.comments.push(commentsByPost);
+                      post.save(function(err, post) {
+                          if (err) {
+                              res.send(err);
+
+                          } else {
+                              res.json(post);
+                          }
+
+                      });
+
+                  }
+
+
+              });
+          }
+
+        });
+
+    };
 
 exports.updatePost = function(req, res) {
   PostModel.findById(req.params.post_id, function(err, posts) {

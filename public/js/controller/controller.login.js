@@ -1,17 +1,24 @@
 angular.module('app').
-controller('loginCtrl', ['$scope', 'loginUser','$location',  function($scope, loginUser, $location){
-	$scope.login = function(){
+controller('loginCtrl', ['$scope', 'loginUser','$location', 'Authentication',
+	function($scope, loginUser, $location, Authentication){
+
+	$scope.authentication = Authentication;
+
+	$scope.login = function() {
 		var loginuser = new loginUser({
 			username: $scope.username,
 			password: $scope.password
 		});
 
 		loginuser.$save(function(data){
+			$scope.authentication.user = data;
+			alert("You have successfully logged in");
 			$location.path('/home');
-			console.log(data);
 
 		}, function(err){
-			console.log(err);
+			alert(err.data.message);
+			$scope.username = '';
+			$scope.password = '';
 
 		});
 

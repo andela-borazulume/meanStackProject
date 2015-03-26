@@ -30,13 +30,13 @@
           <div class="col s8 offset-s1 " id="coll">
           <ul class="collection with-header">
 		        <li class="collection-header grey lighten-1"><h4>Posts</h4></li>
-		        <li class="collection-item"ng-repeat="item in post">{{item.content}}
+		        <li class="collection-item"ng-repeat="item in post">{{item.posts}}
 		        	<span><br><br><a href="#/home" data-ng-click="posts = !posts">comment</a></span>
 						  <form class="col s12" ng-show="posts" ng-submit="comments(item._id)">
 						    <div class="row">
 						      <div class="input-field col s12">
-						        <textarea id="textarea1" class="materialize-textarea" ng-model="item.post.comments"></textarea>
-						        <label for="textarea1">write comment</label>
+						        <textarea id="textarea1" class="materialize-textarea" ng-model="posts.comments"></textarea>
+						        <label for="textarea1">Comment</label>
 						      </div>
 						    </div>
 						    <input type="submit" value="comment" class="waves-effect waves-light btn">
@@ -47,7 +47,7 @@
 				    <div class="row">
 				      <div class="input-field col s12">
 				        <textarea id="textarea1" class="materialize-textarea"></textarea>
-				        <label for="textarea1">post your question</label>
+				        <label for="textarea1">Post Question</label>
 				      </div>
 				    </div>
 				  </form>

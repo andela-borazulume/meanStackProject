@@ -19,7 +19,7 @@ config(['$routeProvider', function($routeProvider) {
     }).
     when('/dashboard', {
         templateUrl: 'views/dashboard.html',
-        controller: ''
+        controller: 'signupCtrl'
     }).
     otherwise({
         redirectTo: '/home'

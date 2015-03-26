@@ -1,5 +1,6 @@
-angular.module('app').controller('signupCtrl', ['$scope','Users','Categories','post','comment', '$location',
- 	function($scope, Users, Categories, post, comment, $location) {
+angular.module('app').controller('signupCtrl', ['$scope','Users','Categories','post','comment','getAllPosts', 'getPostById',
+  'getComments', '$location',
+ 	function($scope, Users, Categories, post, comment , getAllPosts ,getPostById, getComments , $location) {
 		 $scope.register = function(){
         var user = new Users ({
           lastName: $scope.lastName,
@@ -12,10 +13,23 @@ angular.module('app').controller('signupCtrl', ['$scope','Users','Categories','p
 
         user.$save(function(data) {
        		if (data.signupMessage) {
-       			console.log(data.signupMessage);
+       			alert(data.signupMessage);
+            $scope.lastName = '';
+            $scope.firstName = '';
+            $scope.username = '';
+            $scope.password = '';
+            $scope.email = '';
+            $scope.phoneNumber = '';
        		} else if (data.message) {
-       			console.log("Please fill in the whole fields");
+       			alert("Please fill in the whole fields");
+              $scope.lastName = '';
+              $scope.firstName = '';
+              $scope.username = '';
+              $scope.password = '';
+              $scope.email = '';
+              $scope.phoneNumber = '';
        		} else {
+              alert('Registration Successful');
        			$location.path('/login');
        		}
           });
@@ -23,10 +37,7 @@ angular.module('app').controller('signupCtrl', ['$scope','Users','Categories','p
 
   	$scope.getUsers = function(){
   		var users = Users.query(function() {
-  			for(var i=0; i < users.length; i++){
-  				console.log(users[i].lastName);
-
-  			}
+        $scope.details = users;
     		console.log(users);
  	    });
 
@@ -36,27 +47,50 @@ angular.module('app').controller('signupCtrl', ['$scope','Users','Categories','p
       $scope.category = categories;
     });
 
-
-    $scope.showPost = function(query){
-
-      post.getPosts(query, function(data){
-        $scope.post = data;
-        console.log(data);
-        
-      });
-
-    };
-
-    $scope.post = {};
-    $scope.comments = function(query){
-      console.log(query);
-      comment.postComment(query, $scope.post, function(data){
+    $scope.commentBtn = function(query){
+    getComments.getComment(query, function(data){
       console.log(data);
 
       });
     };
 
+
+    $scope.showPost = function(query){
+
+      post.getPosts(query, function(data){
+        $scope.post = data;
+      });
+    };
+
+    $scope.posts = {};
+
+    $scope.comments = function(query) {
+      console.log('query: ', query);
+      comment.postComment(query, $scope.posts, function(data){
+      // window.location.reload();
+      });
+    };
+
+    $scope.getPost = function(){
+      var getAll = getAllPosts.query(function(){
+        $scope.getAllPosts = getAll;
+
+      });
+    };
+
+    $scope.showPostById = function(query){
+
+      getPostById.getpost(query, function(data){
+        $scope.userPost = data;
+        console.log(data);
+        
+      });
+    };
+
 }]);
+
+
+
 
 $(document).ready(function(){
   $(".dropdown-button").dropdown();
