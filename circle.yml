@@ -10,6 +10,3 @@ deployment:
     branch: master
     heroku:
       appname: what-to-wear-app
-  staging:
-    branch: develop
-  
