@@ -24,17 +24,7 @@ module.exports = function(app) {
         .delete(user.requiresLogin, postController.deletePost);
 
     router.route('/posts/:post_id/comments')
-        .post(user.requiresLogin, postController.postComments)
-        .get(function(req, res){
-          PostModel.findById(req.params.post_id, function(err, comments){
-            if(err){
-              res.send(err);
-            }
-            else {
-              res.json(comments);
-            }
-
-          });
-    });
+        .post( postController.postComments)
+        .get(postController.getComments);
 
 };

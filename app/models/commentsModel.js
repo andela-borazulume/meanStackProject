@@ -12,6 +12,11 @@ var commentSchema = new Schema({
 	dateCreated: {
 		type: Date,
 		default: Date.now
+	},
+
+	posts:{
+		type: Schema.Types.ObjectId,
+		ref: 'PostModel'
 	}
 });
 

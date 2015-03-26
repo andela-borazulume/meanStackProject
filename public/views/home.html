@@ -32,7 +32,7 @@
 		        <li class="collection-header grey lighten-1"><h4>Posts</h4></li>
 		        <li class="collection-item"ng-repeat="item in post">{{item.posts}}
 		        	<span><br><br><a href="#/home" data-ng-click="posts = !posts">comment</a></span>
-						  <form class="col s12" ng-show="posts" ng-submit="comments(item._id)">
+						  <form class="col s12" ng-show="posts" ng-submit="commentBtn(item._id)">
 						    <div class="row">
 						      <div class="input-field col s12">
 						        <textarea id="textarea1" class="materialize-textarea" ng-model="posts.comments"></textarea>

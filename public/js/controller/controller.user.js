@@ -20,16 +20,11 @@ angular.module('app').controller('signupCtrl', ['$scope','Users','Categories','p
             $scope.password = '';
             $scope.email = '';
             $scope.phoneNumber = '';
+
        		} else if (data.message) {
        			alert("Please fill in the whole fields");
-              $scope.lastName = '';
-              $scope.firstName = '';
-              $scope.username = '';
-              $scope.password = '';
-              $scope.email = '';
-              $scope.phoneNumber = '';
        		} else {
-              alert('Registration Successful');
+            alert('Registration successful');
        			$location.path('/login');
        		}
           });
@@ -64,10 +59,11 @@ angular.module('app').controller('signupCtrl', ['$scope','Users','Categories','p
 
     $scope.posts = {};
 
-    $scope.comments = function(query) {
+    $scope.commentBtn = function(query) {
       console.log('query: ', query);
       comment.postComment(query, $scope.posts, function(data){
       // window.location.reload();
+      console.log(data);
       });
     };
 

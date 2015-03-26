@@ -41,7 +41,7 @@ exports.getPostById = function(req, res) {
   });
 };
 
-exports. postComments= function(req, res) {
+exports.postComments= function(req, res) {
       var comment = new commentModel(req.body);
       // PostModel.comments.push(comment);
       comment.save(function(err, commentsByPost) {
@@ -78,6 +78,18 @@ exports. postComments= function(req, res) {
         });
 
     };
+
+exports.getComments = function(req, res){
+      PostModel.findById(req.params.post_id, function(err, comments){
+        if(err){
+          res.send(err);
+        }
+        else {
+          res.json(comments);
+        }
+
+      });
+};
 
 exports.updatePost = function(req, res) {
   PostModel.findById(req.params.post_id, function(err, posts) {
