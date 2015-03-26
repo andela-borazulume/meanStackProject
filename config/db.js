@@ -1,3 +1,5 @@
 module.exports = {
-	url: "mongodb://localhost/PersonalDetails"
+	url: proccess.env.MONGOLAB_URI || "mongodb://localhost/PersonalDetails"
 };
+
+
