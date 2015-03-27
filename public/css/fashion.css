@@ -13,7 +13,7 @@
 }
 #heading {
 	font-family: 'Playfair Display', serif;
-	padding-left: 15px;
+	padding-left: 0px;
 }
 #heading2 {
 font-family: 'Playfair Display', serif;
@@ -52,6 +52,15 @@ i{
 	border-bottom: 4px solid;
 
 }
+
+#postBtn {
+	margin-left: 5em;
+}
+
+/*#post {
+	width: 4em;
+	height: 4em;
+}*/
 /*.collection-header{
 	height: 2px;
 	width: 2px;
