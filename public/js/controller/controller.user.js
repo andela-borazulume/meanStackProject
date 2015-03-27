@@ -98,6 +98,7 @@ angular.module('app').controller('signupCtrl', ['$scope','Users','Categories','p
 
       post.getPosts(query, function(data){
         $scope.post = data;
+        console.log(data);
       });
     };
 
