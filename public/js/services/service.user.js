@@ -12,6 +12,7 @@ angular.module('app').factory('Categories', ['$resource',
  angular.module('app').factory('post', ['$http', function($http) {
   return {
     getPosts: function(query, callback) {
+      console.log("/api/categories/"+query+"/posts");
       return $http.get("/api/categories/"+query+"/posts")
         .success(callback);
     }
