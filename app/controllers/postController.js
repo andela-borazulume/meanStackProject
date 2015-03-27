@@ -49,21 +49,21 @@ exports.postComments= function(req, res) {
               res.send(err);
 
           } else {
-              res.json(commentsByPost);
 
               PostModel.findById(req.params.post_id, function(err, post) {
-                console.log(req.params.post_id);
+                // console.log(req.params.post_id);
                   if (err) {
                       res.send(err);
 
                   } else {
-
+                      // console.log(post);
                       post.comments.push(commentsByPost);
                       post.save(function(err, post) {
                           if (err) {
                               res.send(err);
 
                           } else {
+                              // console.log(post);
                               res.json(post);
                           }
 
@@ -73,23 +73,24 @@ exports.postComments= function(req, res) {
 
 
               });
+              // res.json(commentsByPost);
           }
 
         });
 
     };
 
-exports.getComments = function(req, res){
-      PostModel.findById(req.params.post_id, function(err, comments){
-        if(err){
-          res.send(err);
-        }
-        else {
-          res.json(comments);
-        }
+// exports.getComments = function(req, res){
+//       PostModel.findById(req.params.post_id, function(err, comments){
+//         if(err){
+//           res.send(err);
+//         }
+//         else {
+//           res.json(comments);
+//         }
 
-      });
-};
+//       });
+// };
 
 exports.updatePost = function(req, res) {
   PostModel.findById(req.params.post_id, function(err, posts) {

@@ -20,8 +20,8 @@ var postSchema = new Schema({
         ref: "Category"
     },
     comments: [{
-        comments: String,
-        dateCreated: Date
+        type: Schema.Types.ObjectId,
+        ref: "CommentModel"
     }]
 });
 

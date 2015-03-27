@@ -13,14 +13,10 @@
 }
 #heading {
 	font-family: 'Playfair Display', serif;
+	padding-left: 15px;
 }
 #heading2 {
 font-family: 'Playfair Display', serif;
-}
-#search {
-	padding-top: 4em;
-	margin-left: -10em;
-
 }
 #align {
 	margin-right: 15em;
@@ -33,7 +29,7 @@ i{
 	margin-left: -10em;
 }
 #coll {
-	width: 32em;
+	/*width: 100%;*/
 	padding-top: 5em;
 }
 #btn{
@@ -44,3 +40,19 @@ i{
 	margin-left: -30em;
 
 }
+  #search {
+  padding-top: 4em;
+  margin-left: -10em;
+}
+#reduce {
+	margin-left: -4em;
+}
+#show:hover {
+	color: red;
+	border-bottom: 4px solid;
+
+}
+/*.collection-header{
+	height: 2px;
+	width: 2px;
+}*/

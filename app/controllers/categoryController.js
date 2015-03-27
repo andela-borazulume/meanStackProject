@@ -46,7 +46,7 @@ exports.getCategoryById = function(req, res) {
 
 
 exports.getPostByCategory = function(req, res){
-  PostModel.where('category').equals(req.params.category_id).exec(function(err, posts){
+  PostModel.where('category').equals(req.params.category_id).populate("comments").exec(function(err, posts){
     if(err){
       res.send(err);
 

@@ -18,7 +18,7 @@ module.exports = function(app) {
     });
 
     router.route('/categories'). /* to create and find category */
-    post(user.requiresLogin, categoryController.createCategory).
+    post(categoryController.createCategory).
     get(categoryController.allCategories);
 
     router.route('/categories/:category_id'). /* to find, update and delete a particular category */

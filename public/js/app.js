@@ -7,7 +7,7 @@ config(['$routeProvider', function($routeProvider) {
     }).
     when('/login', {
         templateUrl: 'views/login.html',
-        controller: 'loginCtrl'
+        controller: 'signupCtrl'
     }).
     when('/signFirst', {
         templateUrl: 'views/signFirst.html',
@@ -19,6 +19,10 @@ config(['$routeProvider', function($routeProvider) {
     }).
     when('/dashboard', {
         templateUrl: 'views/dashboard.html',
+        controller: 'signupCtrl'
+    }).
+    when('/edit', {
+        templateUrl: 'views/edit.html',
         controller: 'signupCtrl'
     }).
     otherwise({

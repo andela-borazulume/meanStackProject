@@ -17,7 +17,7 @@ exports.createComment = function(req, res) {
   });
 };
 
-exports.getComent = function(req, res) {
+exports.getComment = function(req, res) {
   PostModel.find(function(err, posts) {
     if(err) {
       res.status(500).send(err);

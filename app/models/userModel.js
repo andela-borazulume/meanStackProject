@@ -50,6 +50,13 @@ var userSchema = new Schema({
       unique: true,
       required: "Please fill in your username"
   },
+
+  isAdmin: {
+    type: Boolean,
+    default: false
+
+  },
+
   salt: {
       type: String
   },

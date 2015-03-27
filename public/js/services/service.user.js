@@ -52,3 +52,11 @@ angular.module('app').factory('getComments', ['$http', function($http) {
   };
 }]);
 
+angular.module('app').factory('UpdateUser', function($resource) {
+  return $resource('/api/users/:user_id', { id: '@_id' }, {
+    update: {
+      method: 'PUT'
+    }
+  });
+});
+

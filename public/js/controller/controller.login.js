@@ -1,7 +1,7 @@
 angular.module('app').
 controller('loginCtrl', ['$scope', 'loginUser','$location', 'Authentication',
 	function($scope, loginUser, $location, Authentication){
-
+  
 	$scope.authentication = Authentication;
 
 	$scope.login = function() {
@@ -12,6 +12,18 @@ controller('loginCtrl', ['$scope', 'loginUser','$location', 'Authentication',
 
 		loginuser.$save(function(data){
 			$scope.authentication.user = data;
+			if(data){
+				console.log("hello:");
+				$scope.isLoggedin = true;
+				console.log($scope.isLoggedin );
+
+			}
+
+			else {
+				$scope.isLoggedin = false;
+				console.log($scope.isLoggedin );
+
+			}
 			alert("You have successfully logged in");
 			$location.path('/home');
 

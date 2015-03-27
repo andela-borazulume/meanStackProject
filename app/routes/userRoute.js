@@ -27,7 +27,7 @@ module.exports = function(app) {
 
   router.route('/users/:user_id'). /* to find, update and delete a particular user */
   get(user.getUserById).
-  put(user.updateUser).
+  put(user.requiresLogin, user.updateUser).
   delete(user.deleteUser);
 
   router.route('/users/:user_id/categories/:category_id/posts').

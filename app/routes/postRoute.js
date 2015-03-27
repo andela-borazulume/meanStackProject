@@ -24,7 +24,7 @@ module.exports = function(app) {
         .delete(user.requiresLogin, postController.deletePost);
 
     router.route('/posts/:post_id/comments')
-        .post( postController.postComments)
-        .get(postController.getComments);
+        .post( postController.postComments);
+        // .get(postController.getComments);
 
 };

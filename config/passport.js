@@ -22,7 +22,7 @@ var session = require('express-session');
       User.findOne({ username: username }, function (err, user) {
         if (err) { return done(err); }
         if (!user) {
-          return done(null, false, { message: 'Incorrect username.' });
+          return done(null, false, { message: 'Incorrect username & password' });
         }
         if (!user.authentication(password)) {
           return done(null, false, { message: 'Incorrect password.' });
