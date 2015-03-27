@@ -19,6 +19,16 @@ angular.module('app').factory('Categories', ['$resource',
   };
 }]);
 
+ angular.module('app').factory('createpost', ['$http', function($http) {
+  return {
+    createPosts: function(query, data, callback) {
+      // console.log("/api/categories/"+query+"/posts", data);
+      return $http.post("/api/categories/"+query+"/posts", data)
+        .success(callback);
+    }
+  };
+}]);
+
 angular.module('app').factory('comment', ['$http', function($http) {
 	return {
 		postComment: function(query, data, callback){

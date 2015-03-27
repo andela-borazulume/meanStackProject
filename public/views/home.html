@@ -22,9 +22,10 @@
                                     <h6>{{item.posts}}</h6>
                                     <br>
                                     <h6><b>comments</b></h6>
+                                        
                                     <!-- <ul><li>{{addcomm}}</li></ul> -->
                                     <ul class="collection with-header">
-                                        <li class="collection-item" ng-repeat="item in addcomm"><b>{{item.comments}}</b></li>
+                                        <li class="collection-item" ng-repeat="item in item.comments"><b>{{item.comments}}</b></li>
                                     </ul>
                                     <span><br><br><a href="#/home">comment</a></span>
                                     <form class="col s12" ng-submit="commentBtn(item._id)">
@@ -39,6 +40,15 @@
                                 </li>
                             </ul>
                         </div>
+
+                        <form class="col s12" ng-submit="createPost(categoryId)">
+                        <div class="input-field col s8">
+                            <textarea id="textarea1" class="materialize-textarea" data-ng-model="categorypost.posts"></textarea>
+                            <label for="textarea1">Create Post</label>
+                        </div>
+                         <input type="submit" value="comment" class="waves-effect waves-light btn">
+                        
+                        </form>
                     </div>
                 </div>
             </div>
