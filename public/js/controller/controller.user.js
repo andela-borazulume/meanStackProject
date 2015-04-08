@@ -107,6 +107,7 @@ angular.module('app').controller('signupCtrl', ['$scope', 'Users', 'Categories',
         $scope.createPost = function(query) {
             createpost.createPosts(query, $scope.categorypost, function(data, err) {
                 if (data) {
+                    $scope.showPost();
                     console.log(data);
                     console.log($scope.categorypost.posts);
                 } else if (err) {

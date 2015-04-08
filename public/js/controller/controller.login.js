@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('app').
 controller('loginCtrl', ['$scope', 'loginUser','$location', 'Authentication',
 	function($scope, loginUser, $location, Authentication){
@@ -24,7 +26,7 @@ controller('loginCtrl', ['$scope', 'loginUser','$location', 'Authentication',
 				console.log($scope.isLoggedin );
 
 			}
-			alert("You have successfully logged in");
+			alert('You have successfully logged in');
 			$location.path('/home');
 
 		}, function(err){

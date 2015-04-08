@@ -9,4 +9,4 @@ deployment:
   production:
     branch: master
     heroku:
-      appname: what-to-wear-app
+      appname: what-to-wear-app	

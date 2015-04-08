@@ -15,11 +15,12 @@
                       </div>
                       
                       <div class="col s12 m3 l2">
-                          <h4 id="reduce">Categories</h4>
+                          <!-- <h4 id="reduce">Categories</h4> -->
                           <div id="adjust1">
                               <ul class="collection with-header grey lighten-5">
-                                  <li class="collection-header" ng-repeat="item in category">
-                                      <a href="#/home" data-ng-click="showPost(item._id)" id="show"><h6>{{item.categoryName}}</h6></a>
+                                  <li class="collection-header" style="background: black"><h4 style="color: white;">Categories</h4></li>
+                                  <li class="collection-item" ng-repeat="item in category">
+                                      <a href="#/home" data-ng-click="showPost(item._id)" id="show"><h6 style="color: black">{{item.categoryName}}</h6></a>
                                   </li>
                               </ul>
                           </div>

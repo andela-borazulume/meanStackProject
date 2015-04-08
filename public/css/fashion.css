@@ -49,7 +49,7 @@ i{
 }
 #show:hover {
 	color: red;
-	border-bottom: 4px solid;
+	border-bottom: 4px solid;	
 
 }
 
@@ -57,11 +57,14 @@ i{
 	margin-left: 5em;
 }
 
-/*#post {
-	width: 4em;
-	height: 4em;
-}*/
-/*.collection-header{
-	height: 2px;
-	width: 2px;
+nav ul a{
+	padding: 0 60px !important;
+}
+
+#first {
+	padding: 0 10px !important;
+}
+/*.fa {
+	height: 1px;
+	width: 1px;
 }*/

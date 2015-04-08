@@ -1,4 +1,4 @@
-// 'use strict';
+ 'use strict';
 
 var express = require('express'),
  	app = express(),
@@ -6,7 +6,7 @@ var express = require('express'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	session = require('express-session'),
-	cookieParser = require('cookie-parser');
+	cookieParser = require('cookie-parser'),
 	db = require('./config/db');
 
 
@@ -52,4 +52,4 @@ require('./app/routes/postRoute')(app);
 require('./config/passport')(passport);
 
 app.listen(port);
-console.log("I am listening to you " + port);
+console.log('I am listening to you'  + port);
